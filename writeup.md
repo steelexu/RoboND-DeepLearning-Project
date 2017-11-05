@@ -22,10 +22,10 @@
 * mask image as training objective(batch_y), extracted feature help to segment the image in different resolution
 * fully connected layer is just for classification, useless for getting mask of segmentation , replaced here by the decoder layers
 * encoder and decoder architecture, encoding the images featues by multiple filters, decoding with the help from previous encoder layers raw output(skip connection)
-** encoder using series of convolution layers for extracting features, reduced to a deeper 1x1 convolution layer
-** decoder using transposed convolution layers to upsample the image(recovering to original size)
-** skip connection used  for adding infomation from multiple resolution	
-** 1x1 conv to do dimension reduction for computation efficiency, also has the effect of preserving spacial information from the image.
+ * encoder using series of convolution layers for extracting features, reduced to a deeper 1x1 convolution layer
+ * decoder using transposed convolution layers to upsample the image(recovering to original size)
+ * skip connection used  for adding infomation from multiple resolution	
+ * 1x1 conv to do dimension reduction for computation efficiency, also has the effect of preserving spacial information from the image.
 
 
 
@@ -66,7 +66,7 @@ workers = 2
 * using more deeper network than now , but no final score improved, when it is arround 0.38
 * add layer encoder2xx shape  (?, 10, 10, 512), and epochs changed from 50 to 100, score be around 0.41
 * in the training, I will rerun the fit_generator cell from previous training, or interupt the cell, or reload the weights after restarting jupyter
-* re-run the training for the [recording][./runs-3]
+* re-run the training for the [recording](./runs-3)
 
 ## data and improvement
 * here I just use the given dataset, and do flipping on some images
