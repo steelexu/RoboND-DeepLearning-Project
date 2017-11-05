@@ -22,10 +22,10 @@
 * mask image as training objective(batch_y), extracted feature help to segment the image in different resolution
 * fully connected layer is just for classification, useless for getting mask of segmentation , replaced here by the decoder layers
 * encoder and decoder architecture, encoding the images featues by multiple filters, decoding with the help from previous encoder layers raw output(skip connection)
- * encoder using series of convolution layers for extracting features, reduced to a deeper 1x1 convolution layer
- * decoder using transposed convolution layers to upsample the image(recovering to original size)
- * skip connection used  for adding infomation from multiple resolution	
- * 1x1 conv to do dimension reduction for computation efficiency, also has the effect of preserving spacial information from the image.
+  * encoder using series of convolution layers for extracting features, reduced to a deeper 1x1 convolution layer
+  * decoder using transposed convolution layers to upsample the image(recovering to original size)
+  * skip connection used  for adding infomation from multiple resolution	
+  * 1x1 conv to do dimension reduction for computation efficiency, also has the effect of preserving spacial information from the image.
 
 
 
