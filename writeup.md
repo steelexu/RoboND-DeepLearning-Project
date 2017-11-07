@@ -25,14 +25,20 @@
   * encoder using series of convolution layers for extracting features, reduced to a deeper 1x1 convolution layer
   * decoder using transposed convolution layers to upsample the image(recovering to original size)
   * skip connection used  for adding infomation from multiple resolution	
-  * 1x1 conv to do dimension reduction for computation efficiency, also has the effect of preserving spacial information from the image.
-  * 1x1 using cnn kenerl 1x1 pixel, but generate different filter/channel as upstream layer. its nature is matrix multiplies,and cheap, comparing to  fully connected layer  where  no information about the location of the pixels is preserved.But in segment, we need to classify each pixel
+  * 1x1 conv to do dimension reduction for computation efficiency
+  * 1x1 using cnn kenerl 1x1 pixel, its nature is matrix multiplies,and cheap
+
+# 1x1 convolution
+* 1x1 convolution is equivalent to cross-channel parametric pooling layer, acts like coordinate-dependent transformation in the filter space
+* as layer go deeper: 1x1 convolutions are used to compute reductions before the expensive 3x3 and 5x5 convolutions. 
+* they also include the use of rectified linear activation
+
 
 ## more detail
 
-* Epoch:  one pass over the entire dataset , People often shuffle around the data set between epochs. multiple passes/epoches will avoid the underfitting and may go to optimal or even overfitting .
-* We  can’t pass the entire dataset into the neural net at once.  So divide dataset into Number of Batches .Here set :"Steps per epoch" * batch_size = entire dataset, batch_size should be images-number for one NN training, larger batch_size may   approximates better to the distribution of input, but with limit of the GPU memory 
-* as previous training data setting,  validation_steps = Total_validation_Samples / ValidationBatchSize 
+* Epoch:  one pass over the entire dataset , i.e entire training dataset gets propagated through the network. larger   epoches will avoid the underfitting and may go to optimal or even overfitting .In my training, increase it from 20 to 50 even 100, the final score increase from ~0.3 to ~0.4. But more epoches means more time for training.
+* Batches: We  can’t pass the entire dataset into the neural net at once.  So divide one Epoch into Number of Batches .Here set :"Steps per epoch" * batch_size = entire dataset, batch_size should be images-number for one NN training, larger batch_size may   approximates better to the distribution of input, but with limit of the GPU memory 
+* validation_steps = Total_validation_Samples / ValidationBatchSize 
 * Learning Rate: back-prop training using Gradient Descent, such optimization's steps called learning rate, which are used to adjust the NN weights, initially the rate   is higher and as loss goes  down quickly, then decreasing it may  converge smoothly
 * workers: maximum number of processes to spin up. This can affect your training speed and is dependent on your hardware
 
